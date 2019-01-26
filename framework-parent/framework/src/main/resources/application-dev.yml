@@ -1,0 +1,35 @@
+################## 日志详细配置，不建议放yml里，放logback.xml里
+logging:
+ config: classpath:logback-dev.xml
+##################END
+
+framework:
+  # 系统使用的文件根目录
+  filePath: ./data
+  key:
+  #加密盐 一但设置，不能修改
+    salt: 11
+  #JWT SECRET KEY 一但设置，不能修改。否则，已发出去的token，无法通过校验。(HS256 MUST have a size >= 256 bits)，建议直接在代码中设置
+    secret:  
+  resources:
+      chain:
+          strategy:
+              content:
+                  enabled: true
+                  paths: /**
+
+# 数据源
+spring:
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    jdbcUrl: jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true&autoReconnect=true&failOverReadOnly=false
+    driverClassName: com.mysql.jdbc.Driver
+    username: root
+    password: 9527
+  thymeleaf:
+     cache: false
+     content-type: text/html
+     encoding: UTF-8
+     mode: HTML
+     prefix: classpath:/views
+     suffix: .html

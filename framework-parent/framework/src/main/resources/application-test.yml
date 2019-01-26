@@ -1,0 +1,5 @@
+################## 日志详细配置，不建议放yml里，放logback.xml里方便修改
+####### ,测试环境与生产配置一致
+logging:
+ config: classpath:logback.xml
+################## END
