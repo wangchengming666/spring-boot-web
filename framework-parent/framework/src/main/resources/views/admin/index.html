@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title th:text="${title}">Magneto</title>
+</head>
+<body>
+	<p fwk:sayto="World">Hi ya!</p>
+	 
+	<table>
+		<thead></thead>
+		<tbody>
+			<tr fwk:role id="11" _count="34" _desc="name">
+				<td th:text="${it.name}"></td>
+				<td th:text="${#temporals.format(it.updateTime, 'yyyy-MM-dd')}"></td>
+				<td th:text="${it.systemCode}"></td>
+			</tr>
+			<tr th:object="${page}">
+				<th th:text="*{size}"></th>
+				<th th:text="*{current}"></th>
+			</tr>
+		</tbody>
+	</table>
+	<br />
+	<table>
+		<thead></thead>
+		<tbody>
+			<tr fwk:user id="11" _count="2"  _page="user_page" _desc="identity_card">
+				<td th:text="${it.ucName}"></td>
+				<td th:text="${it.identityCard}"></td>
+				<td th:text="${it.trueName}"></td>
+				<td th:text="${it.nickName}"></td>
+			</tr>
+			<tr th:object="${user_page}">
+				<th th:text="*{size}"></th>
+				<th th:text="*{current}"></th>
+			</tr>
+		</tbody>
+	</table>
+</body>
+</html>

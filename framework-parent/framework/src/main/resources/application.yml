@@ -1,0 +1,16 @@
+#此文件放通用配置
+
+
+######################
+# tomcat 访问日志
+server:
+ tomcat:
+  accesslog:
+   directory: logs
+   enabled: true
+  basedir: ./
+ 
+#激活application-配置文件
+spring:
+  profiles:
+    active: dev

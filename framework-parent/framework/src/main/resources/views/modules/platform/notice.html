@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>系统通知</title>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+<link rel="stylesheet" href="../../css/bootstrap.min.css">
+<link rel="stylesheet" href="../../css/font-awesome.min.css">
+<link rel="stylesheet" href="../../plugins/jqgrid/ui.jqgrid-bootstrap.css">
+<link rel="stylesheet" href="../../plugins/ztree/css/metroStyle/metroStyle.css">
+<link rel="stylesheet" href="../../css/main.css">
+<script src="../../libs/jquery.min.js"></script>
+<script src="../../plugins/layer/layer.js"></script>
+<script src="../../libs/bootstrap.min.js"></script>
+<script src="../../libs/vue.min.js"></script>
+<script src="../../plugins/jqgrid/grid.locale-cn.js"></script>
+<script src="../../plugins/jqgrid/jquery.jqGrid.min.js"></script>
+<script src="../../plugins/ztree/jquery.ztree.all.min.js"></script>
+<script src="../../plugins/wangEditor/wangEditor.js"></script>
+<script src="../../js/common.js"></script>
+</head>
+<body>
+<div id="jeefastapp" v-cloak>
+	<div v-show="showList">
+		<div class="grid-btn">
+			<div class="form-group col-sm-2">
+				<input type="text" class="form-control" v-model="q.title" @keyup.enter="query" placeholder="标题">
+			</div>
+			<a class="btn btn-default" @click="query">查询</a>
+			<div class="btn-group" role="group" aria-label="...">
+				<a v-if="hasPermission('platform:notice:save')" class="btn btn-primary btn-sm" @click="add"><i class="fa fa-plus"></i>&nbsp;新增</a>
+				<a v-if="hasPermission('platform:notice:update')" class="btn btn-primary btn-sm" @click="update"><i class="fa fa-pencil-square-o"></i>&nbsp;修改</a>
+				<a v-if="hasPermission('platform:notice:delete')" class="btn btn-primary btn-sm" @click="del"><i class="fa fa-trash-o"></i>&nbsp;删除</a>
+			</div>
+		</div>
+	    <table id="jqGrid"></table>
+	    <div id="jqGridPager"></div>
+    </div>
+    
+    <div v-show="!showList" class="panel panel-default">
+		<div class="panel-heading">{{title}}</div>
+		<form class="form-horizontal">
+			<div class="form-group">
+			   	<div class="col-sm-2 control-label">标题</div>
+			   	<div class="col-sm-10">
+			      <input type="text" class="form-control" v-model="notice.title" placeholder="标题"/>
+			    </div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-2 control-label">类型</div> 
+				<label class="radio-inline">
+				  <input type="radio" name="status" value="0" v-model="notice.type"/> 平台通知
+				</label>
+				<label class="radio-inline">
+				  <input type="radio" name="status" value="1" v-model="notice.type"/> 业务通知
+				</label>
+			</div>
+			<div class="form-group">
+			   	<div class="col-sm-2 control-label">内容</div>
+			   	<div class="col-sm-10">
+			      <textarea class="form-control" rows="3" v-model="notice.content"></textarea>
+			      <!-- <div id="editor"></div>
+			      <script type="text/javascript">
+				        //初始化编辑器
+					    var E = window.wangEditor;
+					    var editor = new E('#editor');
+					    editor.create();
+					    editor.txt.html($("#contentVal").val());
+				  </script> -->
+			    </div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-2 control-label"></div> 
+				<input type="button" class="btn btn-primary" @click="saveOrUpdate" value="确定"/>
+				&nbsp;&nbsp;<input type="button" class="btn btn-warning" @click="reload" value="返回"/>
+			</div>
+		</form>
+	</div>
+</div>
+
+<script src="../../js/modules/platform/notice.js"></script>
+</body>
+</html>

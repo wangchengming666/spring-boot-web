@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration scan="false" debug="false">
+	<property name="LOG_HOME" value="." />
+	<property name="PROJECT_NAME" value="FILE" />
+	<property name="DEFAULT_CHARSET" value="UTF-8" />
+
+	<!-- console appender -->
+	<appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder charset="${DEFAULT_CHARSET}">
+			<pattern>%date{HH:mm:ss} [%thread] %-5level -> %-100msg  |-%caller{1} %n</pattern>
+		</encoder>
+	</appender>
+
+	<!-- 每天一个文件  -->
+	 <appender name="DAILY_FILE"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${LOG_HOME}/logs/${PROJECT_NAME}.%d{yyyy-MM-dd}.log</fileNamePattern>
+			<maxHistory>31</maxHistory>
+			<totalSizeCap>512MB</totalSizeCap>
+		</rollingPolicy>
+		<encoder charset="${DEFAULT_CHARSET}">
+			<pattern>%date{HH:mm:ss} [%thread] %-5level %logger{35} - %msg%n</pattern>
+		</encoder>
+		<append>true</append>
+		 <!-- 支持多JVM同时操作同一个日志文件 -->  
+<!-- 		<prudent>false</prudent>  -->
+	</appender>
+
+	<logger name="org.gradle.sample" level="DEBUG" additivity="false">
+		<appender-ref ref="console" />
+	</logger>
+	
+<!-- 	 level: 用来设置打印级别，大小写无关：TRACE>DEBUG>INFO>WARN>ERROR, ALL 和 OFF，不能设置为INHERITED或者同义词NULL。 默认是DEBUG。 -->
+	<root level="INFO">
+ 		<appender-ref ref="console" />  
+ 		<appender-ref ref="DAILY_FILE" /> 
+	</root>
+</configuration>
