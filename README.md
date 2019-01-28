@@ -43,6 +43,9 @@
 
 - E-R图
 
+<img width="520" alt="2019-01-27 12 30 12" src="https://user-images.githubusercontent.com/17539174/51813908-a1e44600-22f3-11e9-97d6-2a4594899c76.png">
+
+
 - 运行环境
   - JDK1.8+
   - MySQL5.6+
